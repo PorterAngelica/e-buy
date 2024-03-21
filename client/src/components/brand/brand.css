@@ -1,0 +1,12 @@
+form{
+    margin-top: 50px;
+    gap: 30px;
+
+    input{
+        margin: 15px;
+    }
+
+    button{
+        margin: 15px;
+    }
+}

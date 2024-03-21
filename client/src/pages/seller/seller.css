@@ -1,0 +1,13 @@
+.main{
+    border: 1px red dotted;
+    gap: 50px;
+
+    h1{
+        text-align: left;
+    }
+
+    p{
+        text-align: left;
+    }
+
+}
