@@ -6,10 +6,12 @@ import Home from "./pages/home/Home"
 import Seller from './pages/seller/Seller'
 import Item from './pages/item/Item'
 import AddCategory from './pages/addCategory/AddCategory'
+import { useContext } from 'react'
+// import { AuthContext } from './context/AuthContext'
 
 function App() {
 
-
+  // const { currentUser } = useContext(AuthContext);
   return (
     <>
       <BrowserRouter>
