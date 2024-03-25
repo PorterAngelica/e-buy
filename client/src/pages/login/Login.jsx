@@ -18,25 +18,18 @@ const Login = () => {
     }
     const { login } = useContext(AuthContext)
 
+    //make sure to import cors + origin
     const onSubmit = async (e) => {
         e.preventDefault()
         try{
-        await axios.post("http://localhost:8800/api/auth/login", inputs)
-        Navigate("/home")
-    }catch(err){
+            await login(inputs);
+            Navigate('/home')
+        }catch(err){
+            console.log(err)
             setErr(err.response.data)
-    }
-    }
+        }
+    };
 
-    // const handleLogin = async (e) => {
-    //     e.preventDefault()
-    //     try{
-    //         await login(inputs);
-    //         Navigate('/home')
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // };
     return (
         <div>
             <form onSubmit={onSubmit} >

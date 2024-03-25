@@ -6,6 +6,7 @@ const app = express()
 import authRoutes from "./routes/auth.js"
 import categoryRoutes from "./routes/categories.js"
 import productRoutes from "./routes/products.js"
+import userRoutes from "./routes/users.js"
 import multer from "multer"
 
 //MIDDLEWARE
@@ -15,7 +16,9 @@ app.use((req,res,next) =>{
 });
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors())
+app.use(cors({
+    origin:"http://localhost:5173",
+}))
 app.use(cookieParser())
 
 const storage = multer.diskStorage({
@@ -38,6 +41,7 @@ app.post("/api/upload", upload.single("file"), (req,res) => {
 app.use("/api/auth", authRoutes)
 app.use("/api/category", categoryRoutes)
 app.use("/api/product", productRoutes)
+app.use("/api/user", userRoutes)
 
 app.listen(8800, () =>{
 console.log("backend fire up in port 8800")

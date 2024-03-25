@@ -47,7 +47,7 @@ const Item = () => {
                 category,
                 image: imgUrl,
                 description,
-                users_id
+                users_id: currentUser.id
                 
             })
             Navigate("/admin")
