@@ -8,22 +8,27 @@ import Item from './pages/item/Item'
 import AddCategory from './pages/addCategory/AddCategory'
 import { useContext } from 'react'
 // import { AuthContext } from './context/AuthContext'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
+  const queryClient = new QueryClient();
 
-  // const { currentUser } = useContext(AuthContext);
+
   return (
     <>
+    <QueryClientProvider client={queryClient}>
       <BrowserRouter>
       <Routes>
         <Route path='/login' element={  <Login /> } />
         <Route path='/register' element={  <Register /> } />
+
         <Route path='/home' element={ <Home /> } />
-        <Route path='/admin' element={ <Seller/> } />
+        <Route path='/admin' element={<Seller/> } />
         <Route path='/addProduct' element={ <Item /> } />
         <Route path='/addCategory' element={ <AddCategory /> } />
       </Routes>
       </BrowserRouter>
+      </QueryClientProvider>
     </>
   )
 }
