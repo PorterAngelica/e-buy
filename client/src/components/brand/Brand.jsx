@@ -24,7 +24,7 @@ const Brand = () => {
         mutationFn: (user) => makeRequest.put(`/user/updateUser?id=${currentUser.id}`, user),
         onSuccess: () => {
             queryClient.invalidateQueries(["user"]);
-            Navigate("/home")
+            Navigate("/profile")
         },
         onError: (error) => {
             { error.message }
@@ -36,7 +36,10 @@ const Brand = () => {
         e.preventDefault();
 
         mutation.mutate({...inputs})
+        setInputs("");
     }
+
+    console.log(currentUser)
 
     return (
         <div>
@@ -45,16 +48,16 @@ const Brand = () => {
                 <h3>Brand settings - you can input your information as a brand</h3>
                 <div>
                     <label>Brand name:</label>
-                    <input type="text" name="brand_name" onChange={onChange} />
+                    <input type="text" name="brand_name"  onChange={onChange} />
                 </div>
 
                 <div>
                     <label>Description:</label>
-                    <input type="text" name="brand_description" onChange={onChange} />
+                    <input type="text" name="brand_description"  onChange={onChange} />
                 </div>
                 {err && err}
 
-                <button>Create Brand</button>
+                <button>update Brand</button>
             </form>
 
         </div>

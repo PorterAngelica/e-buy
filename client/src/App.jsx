@@ -9,6 +9,8 @@ import AddCategory from './pages/addCategory/AddCategory'
 import { useContext } from 'react'
 // import { AuthContext } from './context/AuthContext'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Profile from './pages/profile/Profile'
+import Update from './pages/update/Update'
 
 function App() {
   const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ function App() {
         <Route path='/admin' element={<Seller/> } />
         <Route path='/addProduct' element={ <Item /> } />
         <Route path='/addCategory' element={ <AddCategory /> } />
+        <Route path='/update' element={< Update />} />
+        <Route path='/profile/:id' element={ < Profile/> } />
       </Routes>
       </BrowserRouter>
       </QueryClientProvider>
