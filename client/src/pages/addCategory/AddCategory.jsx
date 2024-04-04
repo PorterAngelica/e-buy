@@ -4,7 +4,7 @@ import "./AddCategory.css"
 import axios from "axios"
 
 const AddCategory = () => {
-    const [category, setCategory] = useState();
+    const [name, setName] = useState();
     const [err, setErr] = useState(null)
     const Navigate = useNavigate()
 
@@ -13,7 +13,7 @@ const AddCategory = () => {
 
         try{
         await axios.post("http://localhost:8800/api/category/addCategory",{
-            category
+        name
         })
         Navigate('/admin')
     }catch(err){
@@ -26,7 +26,7 @@ const AddCategory = () => {
             <form onSubmit={onSubmit}>
             <h1>Add Category</h1>
             <label>Category Name</label>
-            <input type="text" name="category" onChange={(e) => setCategory(e.target.value)} />
+            <input type="text" name="name" onChange={(e) => setName(e.target.value)} />
             {err && err}
             <button>Add Category</button>
             </form>

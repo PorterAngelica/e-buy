@@ -26,7 +26,7 @@ return (
                 category && category.map((category, index) => {
                         return (
                 <div className="main-container">
-                <div className="name">{category.category}</div>
+                <div className="name">{category.name}</div>
                 <div className="date">{category.created_at}</div>
                 <div className="action"></div>
         </div>
