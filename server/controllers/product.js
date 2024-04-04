@@ -51,7 +51,7 @@ export const productsBuyed = (req, res) => {
 
 export const shoppingCart = (req,res) => {
 
-    const q =`SELECT p.name, p.price, p.description, p.image, p.category, pb.quantity
+    const q =`SELECT p.name, p.price, p.description, p.image, p.category, pb.quantity, pb.id
     FROM products p
     JOIN ebuy_schema.products_buyed pb ON p.id = pb.products_id
     `
@@ -60,6 +60,15 @@ export const shoppingCart = (req,res) => {
 
     db.query(q, [productsId],(err,data) => {
         if(err) return res.status(500).json(err);
+        return res.status(200).json(data)
+    } )
+}
+
+export const destroy = (req, res) => {
+    const q = "delete from ebuy_schema.products_buyed where id=?"
+
+    db.query(q,[req.params.id], (err,data) => {
+        if(err) return res.status(500).json(err)
         return res.status(200).json(data)
     } )
 }
