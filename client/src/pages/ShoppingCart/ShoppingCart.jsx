@@ -48,17 +48,7 @@ const ShoppingCart = () => {
     const deleteProduct = (productId) => {
         deleteMutation.mutate(productId)
 };
-//     const deleteProduct = (productId) => {
-//         axios.delete(`http://localhost:8800/api/product/${productId}`)
-//         Navigate("/home")
-//         .then((response) => {
-//         })
-//         .catch((err) => {
-//             console.log(err)
-//         });
-// };
 
-    
     if (isLoading){
         return <div> Loading...</div>
     }

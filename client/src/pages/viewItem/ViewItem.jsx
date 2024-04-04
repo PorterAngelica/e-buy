@@ -5,7 +5,7 @@ import { makeRequest } from '../../axios';
 import { useLocation } from 'react-router-dom';
 import ProductsBuy from './ProductsBuy';
 
-const ViewItem = () => {
+const ViewItem = ({userInfo}) => {
     const id = parseInt(useLocation().pathname.split("/")[2]);
     const queryClient = useQueryClient();
 
@@ -38,10 +38,10 @@ const ViewItem = () => {
                         <img src={"/uploads/" + product.image} alt="" />
                     </div>
                     <div className="view-details">
-                        <h3> {product.name} </h3>
-                        <p> ${product.price} </p>
-                        <p>seller:</p>
-                        <p>category</p>
+                        <h3>Name: {product.name} </h3>
+                        <p>Price: ${product.price} </p>
+                        <p>Seller:{product.brand_name}</p>
+                        <p>category: {product.category}</p>
                     </div>
                 </div>
                 <div className="view-right">
