@@ -37,8 +37,10 @@ const Home = () => {
                     return(
                         <div className='product-container'>
                             <div className="product">
+                                <Link to={/viewItem/ + product.id}>
                             <h3>{product.name}</h3>
                             <img src={"/uploads/" + product.image} alt="" />
+                            </Link>
                             <p>${product.price}</p>
                             </div>
                         </div>

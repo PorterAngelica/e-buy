@@ -33,7 +33,7 @@ export const register = (req, res) => {
 }
 
 export const login = (req, res) => {
-    const q = "SELECT * FROM `e-buy_schema`.users WHERE email = ?"
+    const q = "SELECT * FROM `ebuy_schema`.users WHERE email = ?"
 
     db.query(q, [req.body.email], (err,data) => {
 

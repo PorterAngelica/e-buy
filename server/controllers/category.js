@@ -1,10 +1,10 @@
 import {db} from "../connect.js"
 
 export const addCategory = (req, res) => {
-    const q = "INSERT INTO `e-buy_schema`.category (`category`) VALUE (?)";
+    const q = "INSERT INTO `ebuy_schema`.category (`name`) VALUE (?)";
 
     const values = [
-        req.body.category
+        req.body.name
     ]
 
     db.query(q, [values], (err,data) => {
@@ -14,7 +14,7 @@ export const addCategory = (req, res) => {
 };
 
 export const getCategory = (req, res) => {
-    const q = "SELECT * FROM `e-buy_schema`.category"
+    const q = "SELECT * FROM `ebuy_schema`.category"
 
     db.query(q, (err,data) => {
         if(err) return res.status(500).json(err);

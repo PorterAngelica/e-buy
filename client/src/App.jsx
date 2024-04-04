@@ -11,6 +11,8 @@ import { useContext } from 'react'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Profile from './pages/profile/Profile'
 import Update from './pages/update/Update'
+import ViewItem from './pages/viewItem/ViewItem'
+import ShoppingCart from './pages/ShoppingCart/ShoppingCart'
 
 function App() {
   const queryClient = new QueryClient();
@@ -23,13 +25,14 @@ function App() {
       <Routes>
         <Route path='/login' element={  <Login /> } />
         <Route path='/register' element={  <Register /> } />
-
         <Route path='/home' element={ <Home /> } />
         <Route path='/admin' element={<Seller/> } />
         <Route path='/addProduct' element={ <Item /> } />
         <Route path='/addCategory' element={ <AddCategory /> } />
         <Route path='/update' element={< Update />} />
         <Route path='/profile/:id' element={ < Profile/> } />
+        <Route path='/viewItem/:id' element={  <ViewItem/> } />
+        <Route path='/shoppingCart' element={ <ShoppingCart/> } />
       </Routes>
       </BrowserRouter>
       </QueryClientProvider>

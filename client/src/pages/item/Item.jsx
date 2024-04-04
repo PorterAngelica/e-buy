@@ -88,7 +88,7 @@ const Item = () => {
                     <select name="category" onChange={(e) => setCategory(e.target.value)}>
                     {categories && categories.map((category, index) => {
                         return(
-                        <option value={category.id}>{category.category}</option>
+                        <option value={category.name}>{category.name}</option>
                         )
                     })}
                     </select>

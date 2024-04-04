@@ -1,0 +1,13 @@
+.view-main-container{
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.view-left{
+    display: flex;
+}
+img{
+    width: 35%;
+}
