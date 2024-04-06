@@ -12,7 +12,7 @@ const Login = () => {
     })
     const [err, setErr] = useState(null)
     const Navigate = useNavigate();
-    
+
     const handleChange = (e) => {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }))
     }
@@ -21,10 +21,10 @@ const Login = () => {
     //make sure to import cors + origin
     const onSubmit = async (e) => {
         e.preventDefault()
-        try{
+        try {
             await login(inputs);
             Navigate('/home')
-        }catch(err){
+        } catch (err) {
             console.log(err)
             setErr(err.response.data)
         }

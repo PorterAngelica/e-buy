@@ -1,6 +1,7 @@
 import cookieParser from "cookie-parser"
 import express from "express"
 import cors from "cors"
+import bodyParser from "body-parser"
 const app = express()
 
 import authRoutes from "./routes/auth.js"
@@ -20,6 +21,8 @@ app.use(cors({
     origin:"http://localhost:5173",
 }))
 app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended:false }));
+app.use(bodyParser.json())
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {

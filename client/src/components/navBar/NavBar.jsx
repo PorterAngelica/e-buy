@@ -1,10 +1,10 @@
 import React from 'react'
-import "./navBar/navBar.css"
+import "./navBar.css"
 
 const NavBar = () => {
     return (
         <div>
-
+<h1>EBUY</h1>
         </div>
     )
 }
