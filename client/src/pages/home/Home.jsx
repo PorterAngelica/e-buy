@@ -31,7 +31,6 @@ const Home = () => {
     console.log(data)
     return (
         <div className='app' >
-<Link to={`/profile/${currentUser.id}`}>profile</Link>
             {
                 data && data.map((product) => {
                     return(

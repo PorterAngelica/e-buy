@@ -1,0 +1,20 @@
+
+.Nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: azure;
+    height: 60px;
+    
+
+    .logo{
+        display: flex;
+        align-items: center;
+    }
+
+
+    .right{
+    margin-left: 50px;
+    
+    }
+}

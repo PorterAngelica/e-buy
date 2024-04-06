@@ -7,10 +7,11 @@
     border: 1px red solid;
     width: 20%;
 
+
     .product{
         border: 1px black solid;
     }
     img{
-        width: 50%;
+        width: 100%;
     }
 }
