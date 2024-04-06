@@ -1,16 +1,32 @@
 import {db} from "../connect.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import {body, validationResult} from 'express-validator'
 
 export const register = (req, res) => {
+
 
     //CHECK IF USER EXISTS
     const q = "SELECT * FROM users WHERE email = ?"
 
     db.query(q, [req.body.email], (err,data) => {
         if(err) return res.status(500).json(err)
-        if(data.length) return res.status(409).json("User already exists");
+        if(data.length) return res.status(409).json({general:"User already exists"});
 
+        const {first_name, last_name, email, password} = req.body;
+
+        if(!first_name || !last_name || !email || !password){
+            return res.status(400).json({general: "All fields are required"})
+        }
+    
+        if(password.length < 8){
+            return res.status(400).json({password:"Password must be at least 8 characters"})
+        }
+    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailRegex.test(email)){
+            return res.status(400).json({email: "Invalid email format"})
+        }
     //CREATE A NEW USER
         //hash the password
         const salt = bcrypt.genSaltSync(10);
@@ -33,10 +49,10 @@ export const register = (req, res) => {
 }
 
 export const login = (req, res) => {
+
     const q = "SELECT * FROM `ebuy_schema`.users WHERE email = ?"
-
+    
     db.query(q, [req.body.email], (err,data) => {
-
         if (err) return res.status(500).json(err);
 
         if (data.length ===0) return res.status(404).json("User not found");

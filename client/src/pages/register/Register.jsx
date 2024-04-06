@@ -10,27 +10,38 @@ const Register = () => {
         first_name:"",
         last_name: "",
         email:"",
-        password: ""
+        password: "",
+        confirm:""
     });
-
-    const [err, setErr] = useState(null);
+    const [passwordsMatch, setPasswordsMatch] = useState(true)
+    const [err, setErr] = useState({});
     const Navigate = useNavigate();
 
     const handleChange = (e) => {
         setInputs((prev) => ({...prev, [e.target.name]: e.target.value }))
+        setErr({})
+        if(e.target.name === 'password' || e.target.name ==='confirm'){
+            setPasswordsMatch(true);
+        }
     };
 
     const onSubmit = async (e) => {
-        e.preventDefault()
-
+        e.preventDefault();
+    
+        if(inputs.password !== inputs.confirm){
+            setPasswordsMatch(false);
+            return;
+        }
+        const {confirm, ...data} = inputs;
+        console.log(inputs)
         try{
-            await axios.post("http://localhost:8800/api/auth/register", inputs)
-            Navigate('/home')
+            await axios.post("http://localhost:8800/api/auth/register", data)
+            Navigate('/login')
         }catch(err){
             setErr(err.response.data)
         }
     }
-
+    console.log("Render with state:", inputs, passwordsMatch, err);
     return (
         <div>
             <form onSubmit={onSubmit} >
@@ -50,13 +61,17 @@ const Register = () => {
             </div>
             <div>
                 <label>Password:</label>
-                <input type="password" name='password' onChange={handleChange}  />
+                <input type="password" name='password' onChange={handleChange}  /> <br />
+                {err.password && err.password}
             </div>
             <div>
                 <label>confirm:</label>
-                <input type="password"/>
+                <input name="confirm" type="password" onChange={handleChange} /> <br />
+                {!passwordsMatch && <p className='err'> Passwords do not match</p> }
+                
             </div>
-            {err && err}
+            {err.general && err.general}
+            
             <button>Register</button>
             </div>
         </form>
