@@ -30,10 +30,13 @@ export const getProducts = (req, res) => {
 
 export const getProduct = (req, res) => {
     const id = req.params.id;
-    const q = `SELECT u.brand_name, u.brand_description, p.id, p.name, p.price, p.image, p.description
-    FROM ebuy_schema.users u
-    JOIN ebuy_schema.products p ON u.id = p.users_id
-    WHERE p.id = ?`
+    const q = `    SELECT u.brand_name, u.brand_description, p.id, p.name, p.price, p.image, p.description, c.name AS category_name
+    FROM ebuy_schema.products p
+    JOIN ebuy_schema.users u
+    ON u.id = p.users_id
+	JOIN ebuy_schema.category c
+    ON c.id = p.category_id
+    where p.id=?`
     db.query(q, [id], (err, data) => {
         if (err) return res.status(500).json(err)
         return res.status(200).json(data)
