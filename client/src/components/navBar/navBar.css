@@ -10,11 +10,15 @@
     .logo{
         display: flex;
         align-items: center;
+
+        h1{
+            color: black;
+        }
     }
 
 
     .right{
     margin-left: 50px;
-    
     }
+    
 }

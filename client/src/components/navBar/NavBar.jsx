@@ -19,23 +19,23 @@ const NavBar = () => {
         <div className='Nav' >
             <div className="left">
                 <div className="logo">
-                    <Link to="/home" >
-                <h1>EBUY</h1>
+                    <Link to="/home" style={{textDecoration:"none"}}>
+                <h1 >EBUY</h1>
                     </Link>
                 <FaOpencart size={50} />
             </div>
             </div>
             <div className="right">
             <Link to="/shoppingCart">
-            <FiShoppingCart size={35} style={{marginLeft:"50px"}} />
+            <FiShoppingCart size={30} style={{marginLeft:"50px", color:"black"}} />
             </Link>
 
             <Link to={`/profile/${currentUser.id}`}>
-            <FaUser size={35} style={{marginLeft:"50px"}}/>
+            <FaUser size={30} style={{marginLeft:"50px", color:"black"}}/>
             </Link>
 
             
-            <IoMdLogOut size={35} style={{marginLeft:"50px"}} onClick={handleLogout} />
+            <IoMdLogOut size={30} style={{marginLeft:"50px", color:"black"}} onClick={handleLogout} />
 
             </div>
         </div>

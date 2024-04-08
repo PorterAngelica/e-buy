@@ -1,17 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
-import "./home.css"
-import { Link } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
+import React, { useEffect, useState } from 'react'
 import { makeRequest } from '../../axios'
+import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 
 
-const Home = () => {
-    const { currentUser } = useContext(AuthContext)
-    const queryClient = useQueryClient();
+
+const GetProductById = () => {
+
     const [categories, setCategories] = useState([])
+
+    const location = useLocation();
+    const itemId = parseInt(location.pathname.split("/")[2] );
 
     useEffect(() =>{
         axios.get("http://localhost:8800/api/category/getCategory")
@@ -23,31 +24,28 @@ const Home = () => {
         })
     },[])
 
-
-    const {isLoading, error, data} = useQuery({
-        queryKey:["products"],
-        queryFn: () => 
-            makeRequest.get("/product/getProducts").then((response) => {
-                return response.data
-            })
-        
+    const { isLoading, data, error } = useQuery({
+        queryKey: ["product", itemId],
+        queryFn: () => makeRequest.get(`/category/getCategory/${itemId}`).then((response) => {
+            return response.data
+        })
     })
+
     if (isLoading) {
-        return <div> Loading ...</div>;
+        return <div> Loading...</div>
+    }
+    if (error) {
+        return <div> Error: {error.message}</div>
     }
 
-    if (error) {
-        console.log(error)
-        return <div> Error; {error.message} </div>;
-    }
-    console.log("data")
-    console.log(data)
     return (
-        <div className='app' >
+        <div className="app">
             <div className="categories-con">
                 <ul>
                     <h2>Categories</h2>
+                    <Link to="/home" >
                     <p>All</p>
+                    </Link>
                     {
                         categories && categories.map((categories) =>{
                             return(
@@ -64,27 +62,25 @@ const Home = () => {
                     </Link>
                 </ul>
             </div>
-            <div className="items">
+        <div>
             {
-                data && data.map((product) => {
+                data && data.map((item) => {
                     return(
                         <div className='product-container'>
                             <div className="product">
-                                <Link to={/viewItem/ + product.id}>
-                            <h3>{product.name}</h3>
-                            <img src={"/uploads/" + product.image} alt="" />
+                                <Link to={/viewItem/ + item.id}>
+                            <h3>{item.name}</h3>
+                            <img src={"/uploads/" + item.image} alt="" />
                             </Link>
-                            <p>${product.price}</p>
+                            <p>${item.price}</p>
                             </div>
                         </div>
                     )
                 })
             }
-            </div>
-
-
+        </div>
         </div>
     )
 }
 
-export default Home
+export default GetProductById

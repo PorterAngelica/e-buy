@@ -41,7 +41,7 @@ const ViewItem = ({userInfo}) => {
                         <h3>Name: {product.name} </h3>
                         <p>Price: ${product.price} </p>
                         <p>Seller:{product.brand_name}</p>
-                        <p>category: {product.category}</p>
+                        <p>category: </p>
                     </div>
                 </div>
                 <div className="view-right">
