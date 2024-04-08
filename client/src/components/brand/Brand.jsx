@@ -21,10 +21,10 @@ const Brand = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: (user) => makeRequest.put(`/user/updateUser?id=${currentUser.id}`, user),
+        mutationFn: (user) => makeRequest.put(`/user/updateBrand?id=${currentUser.id}`, user),
         onSuccess: () => {
             queryClient.invalidateQueries(["user"]);
-            Navigate("/profile")
+            Navigate(`/profile/${currentUser.id}`)
         },
         onError: (error) => {
             { error.message }
