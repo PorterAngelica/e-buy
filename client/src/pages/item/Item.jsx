@@ -4,70 +4,83 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 //add item
-import {makeRequest} from "../../axios.js"
-
+import { makeRequest } from "../../axios.js"
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 const Item = () => {
     const [categories, setCategories] = useState([])
     const [file, setFile] = useState(null)
-    const [name, setName] = useState("")
-    const [price, setprice ] = useState("")
-    const [category, setCategory] = useState("")
-    const [description, setDescription] = useState("")
-    const [users_id, setUsers_id] = useState("")
-
-    
     const { currentUser } = useContext(AuthContext)
-    
+    const [name, setName] = useState("")
+    const [price, setPrice] = useState("")
+    const [category_id, setCategory_id] = useState("")
+    const [description, setDescription] = useState("")
     const Navigate = useNavigate();
 
-    console.log("currentUser")
-    console.log(currentUser)
+    // console.log("currentUser")
+    // console.log(currentUser)
+    useEffect(() => {
+        axios.get("http://localhost:8800/api/category/getCategory")
+            .then((res) => {
+                console.log(res.data)
+                setCategories(res.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
+
 
     const upload = async () => {
-        try{
+        try {
             const formData = new FormData();
             formData.append("file", file);
             const res = await makeRequest.post("/upload", formData);
             return res.data
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
 
-    const onSubmit = async(e) => {
+
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation({
+        mutationFn: (newProduct) =>
+            makeRequest.post("/product/addProduct", newProduct),
+        onSuccess: () => {
+            queryClient.invalidateQueries(["product"])
+            Navigate("/admin")
+        },
+        onError: (error) => {
+            { error.message }
+            console.log(error)
+        }
+    })
+
+
+    const onSubmit = async (e) => {
         e.preventDefault();
         let imgUrl = "";
         if (file) imgUrl = await upload();
 
-        try{
-            await axios.post("http://localhost:8800/api/product/addProduct", {
-                name,
-                price,
-                category,
-                image: imgUrl,
-                description,
-                users_id: currentUser.id
-                
-            })
-            Navigate("/admin")
-        }catch(err){
-            console.log(err)
+        // Extract the selected category ID from the event object
+        const selectedCategoryId = e.target.category_id.value;
+
+        const newProduct = {
+            name,
+            price,
+            image: imgUrl,
+            description,
+            category_id: selectedCategoryId,
+            users_id: currentUser.id
         }
+
+        mutation.mutate(newProduct);
     }
 
-    useEffect(() => {
-            axios.get("http://localhost:8800/api/category/getCategory")
-            .then((res) => {
-                    console.log(res.data)
-                    setCategories(res.data)
-            })
-            .catch((err) => {
-                    console.log(err);
-            })
-    }, [])
-    console.log("category")
-    console.log(categories)
+    // console.log("category")
+    // console.log(categories)
     return (
         <div className="container">
             <h1>Add product</h1>
@@ -75,28 +88,29 @@ const Item = () => {
 
                 <div>
                     <label>Name:</label>
-                    <input type="text" name="name" onChange={(e) => setName(e.target.value)}/>
+                    <input type="text" name="name" onChange={(e) => setName(e.target.value)} />
                 </div>
 
                 <div>
                     <label>Price:</label>
-                    <input type="number" name="price" onChange={(e) => setprice(e.target.value)} />
+                    <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} />
                 </div>
 
                 <div>
-                <label>Category:</label>
-                    <select name="category" onChange={(e) => setCategory(e.target.value)}>
-                    {categories && categories.map((category, index) => {
-                        return(
-                        <option value={category.name}>{category.name}</option>
-                        )
-                    })}
+                    <label>Category:</label>
+
+                    <select name="category_id" value={category_id} onChange={(e) => setCategory_id(e.target.value)}>
+                        {categories && categories.map((category, index) => {
+                            return (
+                                <option key={category.id} value={category.id}>{category.name}</option>
+                            )
+                        })}
                     </select>
                 </div>
 
                 <div>
                     <label>Image:</label>
-                    <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])}/>
+                    <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} />
                 </div>
 
                 <div>
@@ -104,8 +118,8 @@ const Item = () => {
                     <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} />
                 </div>
 
-            
-                
+
+
                 <button>Add product</button>
 
             </form>

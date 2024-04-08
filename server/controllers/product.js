@@ -1,14 +1,14 @@
 import { db } from "../connect.js"
 
 export const addProduct = (req, res) => {
-    const q = "INSERT INTO `ebuy_schema`.products (`name`,`price`,`image`,`description`, `category`,`users_id`) VALUE (?)"
+    const q = "INSERT INTO `ebuy_schema`.products (`name`,`price`,`image`,`description`,`category_id`,`users_id`) VALUE (?)"
 
     const values = [
         req.body.name,
         req.body.price,
         req.body.image,
         req.body.description,
-        req.body.category,
+        req.body.category_id,
         req.body.users_id,
     ]
     db.query(q, [values], (err, data) => {
@@ -30,7 +30,7 @@ export const getProducts = (req, res) => {
 
 export const getProduct = (req, res) => {
     const id = req.params.id;
-    const q = `SELECT u.brand_name, u.brand_description, p.id, p.name, p.price, p.image, p.description, p.category
+    const q = `SELECT u.brand_name, u.brand_description, p.id, p.name, p.price, p.image, p.description
     FROM ebuy_schema.users u
     JOIN ebuy_schema.products p ON u.id = p.users_id
     WHERE p.id = ?`
@@ -54,7 +54,7 @@ export const productsBuyed = (req, res) => {
 
 export const shoppingCart = (req,res) => {
 
-    const q =`SELECT p.name, p.price, p.description, p.image, p.category, pb.quantity, pb.id
+    const q =`SELECT p.name, p.price, p.description, p.image, pb.quantity, pb.id
     FROM products p
     JOIN ebuy_schema.products_buyed pb ON p.id = pb.products_id
     `

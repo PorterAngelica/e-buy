@@ -1,5 +1,5 @@
 import './App.css'
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom"
+import {BrowserRouter, Navigate, Outlet, Route, Routes} from "react-router-dom"
 import Login from './pages/login/Login'
 import Register from './pages/register/Register'
 import Home from "./pages/home/Home"
@@ -15,14 +15,16 @@ import ViewItem from './pages/viewItem/ViewItem'
 import ShoppingCart from './pages/ShoppingCart/ShoppingCart'
 import NavBar from './components/navBar/NavBar'
 import { AuthContext } from './context/AuthContext'
+import GetProductById from './pages/home/GetProductById'
 
 function App() {
   const queryClient = new QueryClient();
 
-  const layout = () => {
+  const Layout = () => {
     return(
       <QueryClientProvider client={queryClient} >
         <NavBar />
+        <Outlet />
       </QueryClientProvider>
     )
   }
@@ -41,8 +43,8 @@ function App() {
       <Routes>
         <Route path='/login' element={  <Login /> } />
         <Route path='/register' element={  <Register /> } />
-        <Route path='/' element={ <RenderProtectedRoute> <layout/> </RenderProtectedRoute> } >
-        <Route path='/home' element={ <Home /> } />
+        <Route path='/' element={ <RenderProtectedRoute> <Layout/> </RenderProtectedRoute> } >
+        <Route path='/home'  element={ <Home /> } />
         <Route path='/admin' element={<Seller/> } />
         <Route path='/addProduct' element={ <Item /> } />
         <Route path='/addCategory' element={ <AddCategory /> } />
@@ -50,6 +52,7 @@ function App() {
         <Route path='/profile/:id' element={ < Profile/> } />
         <Route path='/viewItem/:id' element={  <ViewItem/> } />
         <Route path='/shoppingCart' element={ <ShoppingCart/> } />
+        <Route path='/getItem/:id' element={<GetProductById />} />
         </Route>
       </Routes>
       </BrowserRouter>

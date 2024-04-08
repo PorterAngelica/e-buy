@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import "./profile.css"
 import { AuthContext } from '../../context/AuthContext';
 import { makeRequest } from '../../axios';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 const Profile = () => {
@@ -32,6 +32,10 @@ const Profile = () => {
             <h3> {data.email} </h3>
             <h3> {data.brand_name} </h3>
             <h3> {data.brand_description} </h3>
+
+            <Link to="/update">
+            <button >update</button>
+            </Link>
         </div>
     )
 }
