@@ -16,6 +16,7 @@ import ShoppingCart from './pages/ShoppingCart/ShoppingCart'
 import NavBar from './components/navBar/NavBar'
 import { AuthContext } from './context/AuthContext'
 import GetProductById from './pages/home/GetProductById'
+import UpdateItem from './pages/item/UpdateItem'
 
 function App() {
   const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ function App() {
         <Route path='/viewItem/:id' element={  <ViewItem/> } />
         <Route path='/shoppingCart' element={ <ShoppingCart/> } />
         <Route path='/getItem/:id' element={<GetProductById />} />
+        <Route path='/updateProduct/:id' element={ <UpdateItem /> } />
         </Route>
       </Routes>
       </BrowserRouter>

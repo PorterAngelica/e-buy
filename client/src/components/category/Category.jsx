@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import "./category.css"
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
+import { makeRequest } from '../../axios'
 
 const Category = () => {
 
@@ -19,20 +21,34 @@ const Category = () => {
         }, [])
         console.log("category")
         console.log(category)
+
+
+
 return (
         <div className='container-1'>
         <h1>Categories</h1>
+        <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                                <th>Name</th>
+                                                <th>Date</th>
+                                                
+                                        </tr>
+                                        </thead>
         {
                 category && category.map((category, index) => {
                         return (
-                <div className="main-container">
-                <div className="name">{category.name}</div>
-                <div className="date">{category.created_at}</div>
-                <div className="action"></div>
-        </div>
+                                <tbody>
+                                <tr>
+                                        <td>{category.name}</td>
+                                        <td>{category.created_at}</td>
+                                        
+                                </tr>
+                                </tbody>
                         )
                 })
         }
+        </table>
         <Link to="/addCategory">
                 <button>Add category</button>
         </Link>
