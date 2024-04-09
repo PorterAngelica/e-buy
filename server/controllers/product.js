@@ -70,11 +70,43 @@ export const shoppingCart = (req,res) => {
     } )
 }
 
-export const destroy = (req, res) => {
+export const deleteFromCart = (req, res) => {
     const q = "delete from ebuy_schema.products_buyed where id=?"
 
     db.query(q,[req.params.id], (err,data) => {
         if(err) return res.status(500).json(err)
         return res.status(200).json(data)
     } )
+}
+
+export const deleteProduct = (req, res) => {
+    const q ="DELETE from ebuy_schema.products WHERE id=?";
+
+    db.query(q, [req.params.id], (err,data)=> {
+        if(err) return res.status(500).json(err);
+        return res.status(200).json(data)
+    })
+
+}
+
+export const updateProduct = (req, res) => {
+    
+    const q = "UPDATE `ebuy_schema`.products SET `name`= ?, `price`=  ?, `image`= ?, `description`= ?, `category_id`= ?, `users_id`= ? WHERE id=?";
+
+    db.query(
+        q,
+        [
+            req.body.name,
+            req.body.price,
+            req.body.image,
+            req.body.description,
+            req.body.users_id,
+            req.body.category_id,
+            req.params.id
+        ],
+        (err,data) =>{
+        if(err) return res.status(500).json(err);
+        if (data.affectedRows > 0) return res.json("Updated!");
+        return res.status(403).json("You can update only your post!");
+    })
 }

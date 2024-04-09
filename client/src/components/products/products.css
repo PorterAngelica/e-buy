@@ -37,4 +37,7 @@ justify-content: space-between;
     margin: 15px;
 }
 
+.table{
+    cursor: pointer;
+}
 }

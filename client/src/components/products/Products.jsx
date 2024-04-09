@@ -3,40 +3,75 @@ import "./products.css"
 import { Link } from 'react-router-dom'
 import Category from '../category/Category'
 import axios from 'axios'
+import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { makeRequest } from '../../axios'
 
 //this page is to show all the products, redirects to add item
 const Products = () => {
         const [item, setItem] = useState([])
 
-        useEffect(() => {
-                axios.get("http://localhost:8800/api/product/getProducts")
-                .then((response) => {
-                        console.log(response.data)
-                        setItem(response.data)
+        const {isLoading, data, error} = useQuery({
+                queryKey:["product"],
+                queryFn:() => makeRequest.get("/product/getProducts").then((response) =>{
+                        return response.data
                 })
-                .catch((err) => {
-                        console.log(err)
-                })
-        },[])
-        console.log("products")
-        console.log(item)
+        })
+
+        const queryClient = useQueryClient();
+
+
+        const deleteMutation = useMutation({
+                mutationFn:(productId) =>{
+                        return makeRequest.delete(`/product/deleteProduct/${productId}`)
+                },
+                onSuccess: () =>{
+                        queryClient.invalidateQueries(["item"]);
+                },
+                onError:(error) =>{
+                        {error.message}
+                        console.log(error.message)
+                }
+        })
+
+        const deleteProduct = (productId) => {
+                deleteMutation.mutate(productId)
+        }
+
+        if(isLoading){
+                return <div>Loading...</div>
+        }
+        if(error){
+                return <div> Error: {error.message}</div>
+        }
+
         return (
                 <div className='main-container'>
                         <div className="container-1">
-
                                 <h1>Products</h1>
-                                {
-                                item && item.map((product, index) =>{
-                                        return(
-                                <div className="main-container">
-                                        <div className="name">{product.name}</div>
-                                        <div className="date">{product.created_at}</div>
-                                        <div className="action"></div>
-                                </div>
-                                        
-                                        )
-                                })
-                                }
+                                <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                                <th>Name</th>
+                                                <th>Date</th>
+                                                <th>Actions</th>
+                                        </tr>
+                                        </thead>
+
+                                        {
+                                                data && data.map((product) => {
+                                                        return (
+                                                                <tbody>
+                                                                <tr>
+                                                                        <td>{product.name}</td>
+                                                                        <td>{product.created_at}</td>
+                                                                        <td> <button onClick={() => deleteProduct(product.id)}>Delete</button></td>
+                                                                        <td> <Link to={`/updateProduct/${product.id}`}>Edit</Link></td>
+                                                                </tr>
+                                                                </tbody>
+                                )
+                        })
+                }
+                </table>
                                 <Link to="/addProduct">
                                         <button>Add item</button>
                                 </Link>
