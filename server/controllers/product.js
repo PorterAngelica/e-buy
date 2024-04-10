@@ -1,6 +1,11 @@
 import { db } from "../connect.js"
 
 export const addProduct = (req, res) => {
+    const {name, price, image, description} = req.body;
+
+    if(!name || !price || !image || !description){
+        return res.status(400).json({general:"All fields are required"})
+    }
     const q = "INSERT INTO `ebuy_schema`.products (`name`,`price`,`image`,`description`,`category_id`,`users_id`) VALUE (?)"
 
     const values = [
@@ -22,6 +27,16 @@ export const getProducts = (req, res) => {
     const q = "SELECT * FROM `ebuy_schema`.products"
 
     db.query(q, (err, data) => {
+        if (err) return res.status(500).json(err);
+        return res.status(200).json(data)
+    })
+
+}
+export const getProductFromSeller = (req, res) => {
+
+    const q = "SELECT * FROM `ebuy_schema`.products WHERE users_id=?"
+
+    db.query(q, [req.params.id], (err, data) => {
         if (err) return res.status(500).json(err);
         return res.status(200).json(data)
     })
@@ -90,6 +105,10 @@ export const deleteProduct = (req, res) => {
 }
 
 export const updateProduct = (req, res) => {
+    const {name, price, image, description} = req.body;
+    if(!name || !price || !image || !description){
+        return res.status(400).json({general:"All fields are required"})
+    }
     
     const q = "UPDATE `ebuy_schema`.products SET `name`= ?, `price`=  ?, `image`= ?, `description`= ?, `category_id`= ?, `users_id`= ? WHERE id=?";
 

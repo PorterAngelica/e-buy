@@ -5,17 +5,32 @@ import { makeRequest } from "../../axios.js"
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AuthContext } from '../../context/AuthContext.jsx'
 
-const UpdateItem = () => {
+const UpdateItem = ({product}) => {
+
+
     const [categories, setCategories] = useState([])
+    const [items, setItems] = useState([])
     const [file, setFile] = useState(null)
     const [name, setName] = useState("")
     const [price, setPrice] = useState("")
     const [category_id, setCategory_id] = useState("")
     const [description, setDescription] = useState("")
+    const [err, setErr] = useState("")
     const Navigate = useNavigate();
     const {currentUser} = useContext(AuthContext)
+    const id = parseInt(useLocation().pathname.split("/")[2]);
 
-    
+    useEffect(() => {
+        axios.get("http://localhost:8800/api/product/getProduct/" + id)
+        .then((res) => {
+            console.log(res.data)
+            setItems(res.data)
+        })
+            .catch((err) => {
+                console.log(err);
+            })
+        }, [])
+
     useEffect(() => {
         axios.get("http://localhost:8800/api/category/getCategory")
         .then((res) => {
@@ -49,7 +64,9 @@ const UpdateItem = () => {
             Navigate("/admin")
         },
         onError: (error) => {
-            { error.message }
+            if(error.response && error.response.status === 400){
+                setErr(error.response.data)
+            }
             console.log(error)
         }
     })
@@ -73,21 +90,22 @@ const UpdateItem = () => {
 
         mutation.mutate(updateProduct);
     }
-
     
     return (
         <div className="container">
         <h1> Update product</h1>
-        <form onSubmit={onSubmit}>
-
+            {
+                items && items.map((item) => {
+                    return(
+            <form onSubmit={onSubmit}>
             <div>
                 <label>Name:</label>
-                <input type="text" name="name" onChange={(e) => setName(e.target.value)} />
+                <input type="text" name="name" onChange={(e) => setName(e.target.value)} placeholder={item.name} />
             </div>
 
             <div>
                 <label>Price:</label>
-                <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} />
+                <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} placeholder={item.price} />
             </div>
 
             <div>
@@ -104,17 +122,24 @@ const UpdateItem = () => {
 
             <div>
                 <label>Image:</label>
-                <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} />
+                <input type="file" id="file" onChange={(e) => setFile(e.target.files[0])} placeholder={item.image}/>
+                
             </div>
 
             <div>
                 <label>Description:</label>
-                <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} />
+                <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} placeholder={item.description} />
             </div>
+            {err.general && err.general}
+            <br />
+
 
             <button>Update product</button>
 
         </form>
+            )
+        })
+    }
     </div>
 )
 }

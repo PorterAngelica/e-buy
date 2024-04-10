@@ -33,9 +33,10 @@ const Profile = () => {
             <h3> {data.brand_name} </h3>
             <h3> {data.brand_description} </h3>
 
-            <Link to="/update">
+            <Link to={`/update/${userId}`}>
             <button >update</button>
             </Link>
+        
         </div>
     )
 }

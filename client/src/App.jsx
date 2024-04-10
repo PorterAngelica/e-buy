@@ -49,9 +49,9 @@ function App() {
         <Route path='/admin' element={<Seller/> } />
         <Route path='/addProduct' element={ <Item /> } />
         <Route path='/addCategory' element={ <AddCategory /> } />
-        <Route path='/update' element={< Update />} />
+        <Route path='/update/:id' element={< Update />} />
         <Route path='/profile/:id' element={ < Profile/> } />
-        <Route path='/viewItem/:id' element={  <ViewItem/> } />
+        <Route path='/viewItem/:id' element={  <ViewItem /> } />
         <Route path='/shoppingCart' element={ <ShoppingCart/> } />
         <Route path='/getItem/:id' element={<GetProductById />} />
         <Route path='/updateProduct/:id' element={ <UpdateItem /> } />

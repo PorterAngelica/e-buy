@@ -15,6 +15,8 @@ const Item = () => {
     const [price, setPrice] = useState("")
     const [category_id, setCategory_id] = useState("")
     const [description, setDescription] = useState("")
+    const [err, setErr] = useState("")
+    const [cartItems, setCartItems] = useState(0);
     const Navigate = useNavigate();
 
     // console.log("currentUser")
@@ -27,6 +29,7 @@ const Item = () => {
             })
             .catch((err) => {
                 console.log(err);
+                
             })
     }, [])
 
@@ -53,8 +56,11 @@ const Item = () => {
             Navigate("/admin")
         },
         onError: (error) => {
-            { error.message }
-            console.log(error)
+            if(error.response && error.response.status === 400){
+                setErr(error.response.data)
+            }{
+                console.log(error)
+            }
         }
     })
 
@@ -117,9 +123,8 @@ const Item = () => {
                     <label>Description:</label>
                     <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} />
                 </div>
-
-
-
+                    {err.general && err.general}
+                    <br />
                 <button>Add product</button>
 
             </form>
