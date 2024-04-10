@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import "./home.css"
+import "./home.scss"
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
@@ -12,6 +12,8 @@ const Home = () => {
     const { currentUser } = useContext(AuthContext)
     const queryClient = useQueryClient();
     const [categories, setCategories] = useState([])
+    
+
 
     useEffect(() =>{
         axios.get("http://localhost:8800/api/category/getCategory")
@@ -32,6 +34,13 @@ const Home = () => {
             })
         
     })
+
+    const arrayChunk = (data,n) => {
+        const array = data.slice()
+        const chunks = [];
+        while (array.length) chunks.push(array.splice(0, n));
+        return chunks;
+    }
     if (isLoading) {
         return <div> Loading ...</div>;
     }
@@ -45,41 +54,51 @@ const Home = () => {
     return (
         <div className='app' >
             <div className="categories-con">
-                <ul>
-                    <h2>Categories</h2>
+                <div className="all">
+                    <h3>Categories</h3>
                     <p>All</p>
                     {
                         categories && categories.map((categories) =>{
                             return(
                                 <div>
-                                    <Link to={`/getItem/${categories.id}`}>
+                                    <Link to={`/getItem/${categories.id}`} style={{textDecoration:"none"}}>
                                     <p>{categories.name}</p>
                                     </Link>
                                 </div>
                             )
                         })
                     }
-                    <Link to="/admin">
+                    <div className='sellerzone'>
+                        <hr />
+                    <Link to="/admin" style={{textDecoration:"none"}}>
                         Seller Zone
                     </Link>
-                </ul>
+                    </div>
+                    </div>
+            
             </div>
-            <div className="items">
+                <div>
+            {arrayChunk(data, 3).map((row, i) => (
+                <div className="items" key={i}>
             {
-                data && data.map((product) => {
-                    return(
-                        <div className='product-container'>
+                row.map((product, i) => {
+                    return (
+                        <div className='product-container'key={i}>
                             <div className="product">
-                                <Link to={/viewItem/ + product.id}>
-                            <h3>{product.name}</h3>
+                                <Link to={/viewItem/ + product.id} style={{textDecoration:"none"}}>
+                            <h6>{product.name}</h6>
+                            <div className="image">
                             <img src={"/uploads/" + product.image} alt="" />
+                            </div>
                             </Link>
                             <p>${product.price}</p>
                             </div>
-                        </div>
+                        </div> 
                     )
                 })
             }
+            </div>
+            ))}
             </div>
 
 

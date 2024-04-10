@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { makeRequest } from '../../axios';
 import { useLocation } from 'react-router-dom';
 import ProductsBuy from './ProductsBuy';
+import UpdateItem from '../item/UpdateItem';
 
 const ViewItem = ({userInfo}) => {
     const id = parseInt(useLocation().pathname.split("/")[2]);
@@ -54,6 +55,7 @@ const ViewItem = ({userInfo}) => {
                 <p> {product.description} </p>
             </div>
             </div>
+
                     )
                 })
             }

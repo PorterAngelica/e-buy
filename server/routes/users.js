@@ -4,7 +4,7 @@ import { getUser, updateUser, getUsers, updateBrand } from '../controllers/user.
 const router = express.Router()
 
 router.get("/find/:userId", getUser)
-router.put("/updateUser", updateUser)
+router.put("/updateUser/:id", updateUser)
 router.put("/updateBrand", updateBrand)
 router.get("/getUsers", getUsers)
 

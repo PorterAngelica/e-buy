@@ -27,8 +27,11 @@ const Brand = () => {
             Navigate(`/profile/${currentUser.id}`)
         },
         onError: (error) => {
-            { error.message }
+            if (error.response && error.response.status === 400) {
+            setErr(error.response.data)
+            }{
             console.log(error)
+            }
         }
     })
 
@@ -48,15 +51,17 @@ const Brand = () => {
                 <h3>Brand settings - you can input your information as a brand</h3>
                 <div>
                     <label>Brand name:</label>
-                    <input type="text" name="brand_name"  onChange={onChange} />
+                    <input type="text" name="brand_name"  onChange={onChange} /> <br />
+                    {err.brand_name && err.brand_name}
                 </div>
 
                 <div>
                     <label>Description:</label>
-                    <input type="text" name="brand_description"  onChange={onChange} />
+                    <input type="text" name="brand_description"  onChange={onChange} /> <br />
+                    {err.brand_description && err.brand_description}
                 </div>
-                {err && err}
-
+                {err.general && err.general}
+                <br />
                 <button>update Brand</button>
             </form>
 

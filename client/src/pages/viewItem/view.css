@@ -11,3 +11,9 @@
 img{
     width: 35%;
 }
+
+.updateItem{
+    display: none;
+    opacity: 0;
+  height: 0px !important;
+}

@@ -2,6 +2,7 @@ import { query } from "express";
 import {db} from "../connect.js"
 import jwt from "jsonwebtoken";
 
+
 export const getUser = (req, res) => {
     const userId = req.params.userId;
     const q = "SELECT * FROM `ebuy_schema`.users WHERE id=?"
@@ -23,6 +24,16 @@ export const updateUser = (req,res) => {
     jwt.verify(token, "secretkey", (err, userInfo) => {
         if (err) return res.status(403).json("Token is not valid!");
 
+        const {first_name, last_name, email, password, brand_name, brand_description} = req.body;
+
+        if(!first_name || !last_name || !email || !brand_name || !brand_description){
+            return res.status(400).json({general: "All fields are required"})
+        }
+    
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailRegex.test(email)){
+            return res.status(400).json({email: "Invalid email format"})
+        }
         const q =
         "UPDATE `ebuy_schema`.users SET `first_name`=?, `last_name`=?, `email`=?, `brand_name`=?,`brand_description`=?  WHERE id=? ";
 
@@ -50,6 +61,8 @@ export const updateBrand = (req,res) => {
 
     jwt.verify(token, "secretkey", (err, userInfo) => {
         if (err) return res.status(403).json("Token is not valid!");
+
+
 
         const q =
         "UPDATE `ebuy_schema`.users SET  `brand_name`=?,`brand_description`=?  WHERE id=? ";

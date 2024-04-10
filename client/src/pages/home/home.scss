@@ -1,0 +1,83 @@
+.app {
+    display: flex;
+    margin: 50px;
+    background-color: beige;
+
+    .categories-con {
+        margin: 30px;
+        /* flex: 1; */
+        /* background-color:green; */
+        width: 400px;
+            background-color: white;
+                -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+
+                .all{
+                    padding: 10px ;
+                    margin: 15px;
+                }
+        h6 {
+            text-decoration: none;
+        }
+
+        p {}
+
+        p {}
+
+        .sellerzone {
+            text-align: center;
+            margin-top: 100px;
+
+            hr {}
+
+
+        }
+    }
+
+    div {
+        .items {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap;
+
+            .product-container {
+                /* flex: 2; */
+                /* background-color: cadetblue; */
+                margin: 30px;
+                // border: 1px black solid;
+                width: 25%;
+                background-color: white;
+                -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+
+                
+                display: flex;
+                flex-wrap: wrap;
+
+                .product {
+                    /* border: 1px black solid; */
+                    height: 200px;
+                    margin: 5px;
+                    flex-wrap: wrap;
+
+                    h6 {}
+
+                    .image {
+                        object-fit: cover;
+                        margin-left: 60px;
+
+                        img {}
+                    }
+
+                    p {
+                        margin-top: 20px;
+                    }
+
+                }
+            }
+        }
+
+    }
+}
