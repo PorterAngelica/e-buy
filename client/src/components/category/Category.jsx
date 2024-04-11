@@ -25,9 +25,9 @@ const Category = () => {
 
 
 return (
-        <div className='container-1'>
+        <div className='container-1' style={{border:"none"}}>
         <h1>Categories</h1>
-        <table class="table table-bordered table-hover">
+        <table className="table table-bordered table-hover">
                                         <thead>
                                         <tr>
                                                 <th>Name</th>
@@ -36,9 +36,9 @@ return (
                                         </tr>
                                         </thead>
         {
-                category && category.map((category, index) => {
+                category && category.map((category, i) => {
                         return (
-                                <tbody>
+                                <tbody key={i}>
                                 <tr>
                                         <td>{category.name}</td>
                                         <td>{category.created_at}</td>

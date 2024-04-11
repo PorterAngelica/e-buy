@@ -1,0 +1,93 @@
+.view-main{
+    // background-color: beige;
+    margin: 30px;
+
+.view-main-container{
+    display: flex;
+    gap: 50px;
+    margin: 30px;
+    align-items: center;
+    justify-content: space-around;
+    
+
+
+    .view-left{
+        display: flex;
+        // gap: 50px;
+        margin-top: 30px;
+        // background-color: white ;
+        // -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        // -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        // box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+
+        .view-image{
+            width: 35%;
+            margin:10px;
+            -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        padding: 10px;
+            img{
+                width: 100%;
+            }
+        }
+
+        .view-details{
+            padding: 30px;
+            background-color:white;
+            -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+            -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+            box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+            width: 365px;
+            height: 365px;
+            margin: 10px;
+            h3{}
+            p{}
+
+        }
+
+    }
+
+    .view-right{
+        width: 365px;
+        height: 365px;
+        background-color: white;
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        h4{
+            margin-top: 60px;
+        }
+
+
+    }
+
+}
+    .view-description{
+        
+        background-color: white;
+        margin: 50px;
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        text-align: left;
+        padding: 10px;
+        h2{
+            margin-left: 100px;
+        }
+        h6{
+            margin-left: 100px;
+        }
+    }
+}
+
+// .productsBuy{
+//     padding: 30px;
+//             background-color:white;
+//             // -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+//             // -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+//             // box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+//             width: 305px;
+//             height: 305px;
+//             margin: 10px;
+// }

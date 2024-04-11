@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import "./products.css"
+import "./products.scss"
 import { Link } from 'react-router-dom'
 import Category from '../category/Category'
 import axios from 'axios'
@@ -47,10 +47,10 @@ const Products = () => {
         }
 
         return (
-                <div className='main-container'>
-                        <div className="container-1">
+                <div className='main-container' style={{border:"none"}} >
+                        <div className="container-1" style={{border:"none"}}>
                                 <h1>Products</h1>
-                                <table class="table table-bordered table-hover">
+                                <table className="table table-bordered table-hover">
                                         <thead>
                                         <tr>
                                                 <th>Name</th>
@@ -60,15 +60,15 @@ const Products = () => {
                                         </thead>
 
                                         {
-                                                data && data.map((product) => {
+                                                data && data.map((product,i) => {
                                                         return (
-                                                                <tbody>
+                                                                <tbody key={i}>
                                                                 <tr>
-                                                                        <Link to={`/viewItem/${product.id}`}>
+                                                                        <Link to={`/viewItem/${product.id}`} style={{textDecoration:"none"}}>
                                                                         <td>{product.name}</td>
                                                                         </Link>
                                                                         <td>{product.created_at}</td>
-                                                                        <td> <button onClick={() => deleteProduct(product.id)}>Delete</button></td>
+                                                                        <td> <button className='delete' onClick={() => deleteProduct(product.id)}>Delete</button></td>
                                                                         <td> <Link to={`/updateProduct/${product.id}`}>Edit</Link></td>
                                                                 </tr>
                                                                 </tbody>
@@ -82,10 +82,10 @@ const Products = () => {
 
                         </div>
 
-                        <div className="container-2">
+                        {/* <div className="container-2">
                                 <Category />
 
-                        </div>
+                        </div> */}
                 </div>
         )
 }

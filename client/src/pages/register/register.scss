@@ -4,16 +4,17 @@
     flex-direction: column;
     gap: 50px;
     justify-content: center;
-
-    form{
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
+    // background-color: aqua;
 
     input{
         border: none;
         border-bottom: 1px solid lightgray;
     }
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
 
     button{
         width: 50%;

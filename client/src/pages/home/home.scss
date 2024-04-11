@@ -1,13 +1,19 @@
 .app {
-    display: flex;
-    margin: 50px;
-    background-color: beige;
+    // background-color: rgb(240, 240, 237);
+
+    .home-page{
+        display: flex;
+        margin: 50px;
+        // background-color: pink;
+        margin-left: 10%;
+        margin-right: 10%;
+    
 
     .categories-con {
         margin: 30px;
         /* flex: 1; */
         /* background-color:green; */
-        width: 400px;
+        width: 300px;
             background-color: white;
                 -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
                 -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
@@ -36,10 +42,11 @@
     }
 
     div {
-        .items {
+        .home-items {
             flex: 2;
             display: flex;
             flex-wrap: wrap;
+            
 
             .product-container {
                 /* flex: 2; */
@@ -47,32 +54,54 @@
                 margin: 30px;
                 // border: 1px black solid;
                 width: 25%;
-                background-color: white;
-                -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-                -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-                box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                // background-color: white;
+                // -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                // -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                // box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
 
                 
                 display: flex;
+                padding-left: 50px;
                 flex-wrap: wrap;
 
                 .product {
-                    /* border: 1px black solid; */
-                    height: 200px;
+                    width: 200px;
+                    height: 300px;
+                    object-fit: cover;
+                    margin-left: 60px;
+                    // background-color: green;
                     margin: 5px;
                     flex-wrap: wrap;
+                    
 
                     h6 {}
 
-                    .image {
+                    .home-image {
+                        width: 200px;
+                        height: 300px;
                         object-fit: cover;
-                        margin-left: 60px;
+                        // margin-left: 60px;
+                        gap: 20px;
+                        // background-color: aqua;
+                        // border: 2px red solid;
+                        background-color: white;
+                        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+                        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
 
-                        img {}
+                        img {
+                            width: 200px;
+                            object-fit: cover;
+                            padding: 30px;
+                        }
+
+                        h6{
+                            padding-top: 30px;
+                        }
                     }
 
                     p {
-                        margin-top: 20px;
+                        // margin-top: 20px;
                     }
 
                 }
@@ -80,4 +109,5 @@
         }
 
     }
+}
 }

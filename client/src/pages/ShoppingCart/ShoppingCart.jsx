@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "./shoppingCart.css"
+import "./shoppingCart.scss"
 import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { makeRequest } from '../../axios'
 import axios from 'axios'
@@ -67,7 +67,7 @@ const ShoppingCart = () => {
                 {
                     data && data.map((product) => {
                         return(
-                            <div  key={product.id} className='div'>
+                            <div  key={product.id} className='shoppingCart-main'>
                                 <div className="left">
                                 <div className="image">
                                     <img src={"/uploads/" + product.image} alt=""  />

@@ -42,7 +42,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
       <Routes>
-        <Route path='/login' element={  <Login /> } />
+        <Route index path='/login' element={  <Login /> } />
         <Route path='/register' element={  <Register /> } />
         <Route path='/' element={ <RenderProtectedRoute> <Layout/> </RenderProtectedRoute> } >
         <Route path='/home'  element={ <Home /> } />
