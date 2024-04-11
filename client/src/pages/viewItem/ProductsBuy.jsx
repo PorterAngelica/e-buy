@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import "./view.scss"
 
 const ProductsBuy = ({product}) => {
     const [quantity, setQuantity] = useState("")
@@ -21,12 +22,12 @@ const ProductsBuy = ({product}) => {
     }
 
     return (
-        <div>
+        <div className='productsBuy'>
             <form onSubmit={onSubmit} >
             <label>Quantity:</label> <br/>
             <input type="number" name="quantity" onChange={(e) => setQuantity(e.target.value)} /> <br />
             <input type="hidden" name="products_id" value={product.id} />
-            <button> buy product </button>
+            <button> Add to cart </button>
             </form>
         </div>
     )

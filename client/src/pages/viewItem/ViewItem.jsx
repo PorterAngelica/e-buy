@@ -1,5 +1,5 @@
 import React from 'react'
-import "./view.css"
+import "./view.scss"
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { makeRequest } from '../../axios';
 import { useLocation } from 'react-router-dom';
@@ -39,10 +39,10 @@ const ViewItem = ({userInfo}) => {
                         <img src={"/uploads/" + product.image} alt="" />
                     </div>
                     <div className="view-details">
-                        <h3>Name: {product.name} </h3>
-                        <p>Price: ${product.price} </p>
-                        <p>Seller:{product.brand_name}</p>
-                        <p>category:{product.category_name} </p>
+                        <h3>{product.name} </h3>
+                        <p> <strong>Price:</strong> ${product.price} </p>
+                        <p><strong>Seller:</strong> {product.brand_name}</p>
+                        <p><strong>category:</strong> {product.category_name} </p>
                     </div>
                 </div>
                 <div className="view-right">
@@ -50,9 +50,9 @@ const ViewItem = ({userInfo}) => {
                     <ProductsBuy key={product.id} product={product} /> 
                 </div>
             </div>
-            <div className="view-details">
-                <h2>About a product</h2> <br />
-                <p> {product.description} </p>
+            <div className="view-description">
+                <h2>About a product</h2> 
+                <h6> {product.description} </h6>
             </div>
             </div>
 

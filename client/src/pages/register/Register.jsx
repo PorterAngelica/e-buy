@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import axios from "axios"
 
-import "./register.css"
+import "./register.scss"
 
 const Register = () => {
 
@@ -46,6 +46,8 @@ const Register = () => {
         <div>
             <form onSubmit={onSubmit} >
             <div className="container">
+
+                
             <div>
                 <label> First name:</label>
                 <input type="text" name='first_name' onChange={handleChange} />

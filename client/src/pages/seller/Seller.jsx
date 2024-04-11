@@ -15,6 +15,7 @@ const Seller = () => {
 
             <div className="container">
                 <Products />
+                <Category />
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import "./login.css"
+import "./login.scss"
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from "../../context/AuthContext"
@@ -34,6 +34,7 @@ const Login = () => {
         <div>
             <form onSubmit={onSubmit} >
                 <div className="container">
+                <h1>Welcome Back!</h1>
                     <div>
                         <label>Email:</label>
                         <input type="email" name='email' onChange={handleChange} />
