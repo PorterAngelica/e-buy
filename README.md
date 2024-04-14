@@ -1,4 +1,4 @@
-e-Buy 
+```E-BUY```
 e-Buy is a full-stack e-commerce application built using JavaScript, React, Node.js, Express, MySQL, SCSS, and React Router. This application replicates the functionality of popular e-commerce platforms like eBay, allowing users to browse through various product categories, make purchases, and even sell their own products.
 
 Features
